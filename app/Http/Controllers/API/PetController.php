@@ -15,11 +15,11 @@ class PetController extends Controller
      */
     public function index()
     {
-        $pets = Pet::all();
+        $pet = Pet::all();
 
         $data = [
             'status' => true,
-            'pets' => $pets
+            'pets' => $pet
         ];
 
         return response()->json($data);
@@ -43,7 +43,25 @@ class PetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pet = new Pet;
+
+        $pet->pet_name = $request->pet_name;
+        $pet->pet_type = $request->pet_type;
+        $pet->pet_sex = $request->pet_sex;
+        $pet->pet_breed = $request->pet_breed;
+        $pet->pet_birthdate = $request->pet_birthdate;
+        $pet->pet_weight = $request->pet_weight;
+        $pet->pet_description = $request->pet_description;
+
+        $pet->save();
+
+        $data = [
+            'status' => true,
+            'pet' => $pet
+        ];
+
+        return response()->json($data, 201);
+
     }
 
     /**

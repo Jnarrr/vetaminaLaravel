@@ -15,3 +15,4 @@ Route::delete('delete-clinic/{id}', [ClinicController::class, 'destroy']);
 Route::post('vetregister', [VetController::class, 'vetregister']);
 
 Route::get('pets', [PetController::class, 'index']);
+Route::post('pets', [PetController::class, 'store']);
