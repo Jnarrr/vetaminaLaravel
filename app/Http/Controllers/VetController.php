@@ -19,4 +19,12 @@ class VetController extends Controller
 
         return $vetuser;
     }
+
+    function vetlogin(Request $req){
+        $vetuser = User::where('email',$req->email)->first();
+        if(!$vetuser || !Hash::check($req->password,$vetuser->password)){
+            return ["error"=>"Email or Password is not matched"];
+        }
+        return $vetuser;
+    }
 }

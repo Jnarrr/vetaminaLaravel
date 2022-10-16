@@ -13,6 +13,7 @@ Route::put('update-clinic/{id}', [ClinicController::class, 'update']);
 Route::delete('delete-clinic/{id}', [ClinicController::class, 'destroy']);
 
 Route::post('vetregister', [VetController::class, 'vetregister']);
+Route::post('vetlogin', [VetController::class, 'vetlogin']);
 
 Route::get('pets', [PetController::class, 'index']);
 Route::post('pets', [PetController::class, 'store']);
