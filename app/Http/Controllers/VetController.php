@@ -14,6 +14,7 @@ class VetController extends Controller
         $vetuser = new User;
         $vetuser -> name = $req -> input('name');
         $vetuser -> email = $req -> input('email');
+        $vetuser -> phone_number = $req -> input('phone_number');
         $vetuser -> password = Hash::make($req -> input('password'));
         $vetuser -> save();
 
