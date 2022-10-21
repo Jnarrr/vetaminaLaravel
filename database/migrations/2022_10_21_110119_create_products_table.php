@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vet_users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('password');
+        Schema::create('products', function (Blueprint $table) {
+            $table->id('id');
+            $table->string('product_name');
+            $table->string('product_price');
+            $table->string('product_description');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vet_users');
+        Schema::dropIfExists('products');
     }
 };
