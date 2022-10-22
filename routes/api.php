@@ -7,6 +7,7 @@ use App\Http\Controllers\VetController;
 use App\Http\Controllers\API\PetController;
 use App\Http\Controllers\API\AppointmentController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\ServiceController;
 
 Route::get('clinics', [ClinicController::class, 'index']);
 Route::post('/add-clinic', [ClinicController::class, 'store']);
@@ -19,6 +20,12 @@ Route::post('/add-product', [ProductController::class, 'store']);
 Route::get('/edit-product/{id}', [ProductController::class, 'edit']);
 Route::put('update-product/{id}', [ProductController::class, 'update']);
 Route::delete('delete-product/{id}', [ProductController::class, 'destroy']);
+
+Route::get('services', [ServiceController::class, 'index']);
+Route::post('/add-service', [ServiceController::class, 'store']);
+Route::get('/edit-service/{id}', [ServiceController::class, 'edit']);
+Route::put('update-service/{id}', [ServiceController::class, 'update']);
+Route::delete('delete-service/{id}', [ServiceController::class, 'destroy']);
 
 Route::post('vetregister', [VetController::class, 'vetregister']);
 Route::post('vetlogin', [VetController::class, 'vetlogin']);
