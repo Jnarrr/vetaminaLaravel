@@ -8,6 +8,7 @@ use App\Http\Controllers\API\PetController;
 use App\Http\Controllers\API\AppointmentController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ServiceController;
+use App\Http\Controllers\API\EmployeeController;
 
 Route::get('clinics', [ClinicController::class, 'index']);
 Route::post('/add-clinic', [ClinicController::class, 'store']);
@@ -26,6 +27,12 @@ Route::post('/add-service', [ServiceController::class, 'store']);
 Route::get('/edit-service/{id}', [ServiceController::class, 'edit']);
 Route::put('update-service/{id}', [ServiceController::class, 'update']);
 Route::delete('delete-service/{id}', [ServiceController::class, 'destroy']);
+
+Route::get('employees', [EmployeeController::class, 'index']);
+Route::post('/add-employee', [EmployeeController::class, 'store']);
+Route::get('/edit-employee/{id}', [EmployeeController::class, 'edit']);
+Route::put('update-employee/{id}', [EmployeeController::class, 'update']);
+Route::delete('delete-employee/{id}', [EmployeeController::class, 'destroy']);
 
 Route::post('vetregister', [VetController::class, 'vetregister']);
 Route::post('vetlogin', [VetController::class, 'vetlogin']);
