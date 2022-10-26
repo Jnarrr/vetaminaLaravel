@@ -13,18 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('clinics', function (Blueprint $table) {
+        Schema::create('customerusers', function (Blueprint $table) {
             $table->id();
             $table->string('username');
+            $table->string('birthdate');
             $table->string('password');
-            $table->string('registration_number');
-            $table->string('owner_name');
-            $table->string('clinic_name');
-            $table->string('phone_number');
-            $table->string('address');
-            $table->string('email')->unique();
-            $table->string('permit');
-            $table->boolean('verified')->default('0')->change();
+            $table->string('email');
+            $table->string('mobile_number');
             $table->timestamps();
         });
     }
@@ -36,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clinics');
+        Schema::dropIfExists('customerusers');
     }
 };
