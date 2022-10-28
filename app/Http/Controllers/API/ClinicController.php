@@ -92,10 +92,16 @@ class ClinicController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(),[
-            'name'=>'required|max:191',
+            'username'=>'required|max:191',
+            'password'=>'required|max:191',
+            'registration_number'=>'required|max:191',
+            'owner_name'=>'required|max:191',
+            'clinic_name'=>'required|max:191',
+            'phone_number'=>'required|max:191',
             'address'=>'required|max:191',
             'email'=>'required|email|max:191',
-            'phone'=>'required|max:10|min:10',
+            'permit'=>'required|max:8000',
+            'verified'=>'required|max:191',
         ]);
 
         if($validator->fails())
@@ -110,11 +116,15 @@ class ClinicController extends Controller
             $clinic = Clinic::find($id);
             if($clinic)
             {
-
-                $clinic->name = $request->input('name');
+                $clinic->username = $request->input('username');
+                $clinic->password = $request->input('password');
+                $clinic->registration_number = $request->input('registration_number');
+                $clinic->owner_name = $request->input('owner_name');
+                $clinic->clinic_name = $request->input('clinic_name');
+                $clinic->phone_number = $request->input('phone_number');
                 $clinic->address = $request->input('address');
                 $clinic->email = $request->input('email');
-                $clinic->phone = $request->input('phone');
+                $clinic->verified = $request->input('verified');
                 $clinic->update();
 
                 return response()->json([
