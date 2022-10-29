@@ -12,6 +12,7 @@ use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\CustomerUserController;
 
 Route::get('clinics', [ClinicController::class, 'index']);
+Route::get('clinics2', [ClinicController::class, 'index2']);
 Route::post('/add-clinic', [ClinicController::class, 'store']);
 Route::get('/edit-clinic/{id}', [ClinicController::class, 'edit']);
 Route::put('update-clinic/{id}', [ClinicController::class, 'update']);

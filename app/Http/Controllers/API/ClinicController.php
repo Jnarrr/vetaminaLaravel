@@ -12,10 +12,19 @@ class ClinicController extends Controller
 {
     public function index()
     {
-        $clinics = Clinic::all();
+        $clinics = Clinic::where('verified', 'false')->get();
         return response()->json([
             'status'=> 200,
             'clinics'=>$clinics,
+        ]);
+    }
+
+    public function index2()
+    {
+        $clinics2 = Clinic::where('verified', 'true')->get();
+        return response()->json([
+            'status'=> 200,
+            'clinics2'=>$clinics2,
         ]);
     }
 
