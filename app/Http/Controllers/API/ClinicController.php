@@ -6,6 +6,7 @@ use App\Models\Clinic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class ClinicController extends Controller
 {
@@ -21,6 +22,17 @@ class ClinicController extends Controller
     public function list()
     {
         return Clinic::all();
+    }
+
+    public function cliniclogin(Request $req){
+        $clinicuser = Clinic::where('username',$req->username)->first();
+        if(!$clinicuser || !Hash::check($req->password,$clinicuser->password)){
+            return ["error"=>"Email or Password is not matched"];
+        }
+        if($clinicuser && Hash::check($req->password,$clinicuser->password) && !($clinicuser->verified == "true")){
+            return ["notVerified"=>"User is not yet verified"];
+        }
+        return $clinicuser;
     }
 
     public function store(Request $request)
@@ -49,7 +61,7 @@ class ClinicController extends Controller
         {
             $clinic = new Clinic;
             $clinic->username = $request->input('username');
-            $clinic->password = $request->input('password');
+            $clinic->password = Hash::make($request->input('password'));
             $clinic->registration_number = $request->input('registration_number');
             $clinic->owner_name = $request->input('owner_name');
             $clinic->clinic_name = $request->input('clinic_name');
