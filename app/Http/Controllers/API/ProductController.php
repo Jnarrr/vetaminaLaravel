@@ -14,14 +14,15 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($clinic_id)
     {
-        $products = Product::all();
+        $products = Product::where('clinic_id', $clinic_id)->get();
         return response()->json([
             'status'=> 200,
             'products'=>$products,
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -42,6 +43,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
+            'clinic_id'=>'required|max:191',
             'product_name'=>'required|max:191',
             'product_price'=>'required|max:191',
             'product_description'=>'required|max:191',
@@ -57,6 +59,7 @@ class ProductController extends Controller
         else
         {
             $product = new Product;
+            $product->clinic_id = $request->input('clinic_id');
             $product->product_name = $request->input('product_name');
             $product->product_price = $request->input('product_price');
             $product->product_description = $request->input('product_description');
