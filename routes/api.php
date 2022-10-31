@@ -27,19 +27,19 @@ Route::get('/edit-product/{id}', [ProductController::class, 'edit']);
 Route::put('update-product/{id}', [ProductController::class, 'update']);
 Route::delete('delete-product/{id}', [ProductController::class, 'destroy']);
 
-Route::get('services', [ServiceController::class, 'index']);
+Route::get('services/{id}', [ServiceController::class, 'index']);
 Route::post('/add-service', [ServiceController::class, 'store']);
 Route::get('/edit-service/{id}', [ServiceController::class, 'edit']);
 Route::put('update-service/{id}', [ServiceController::class, 'update']);
 Route::delete('delete-service/{id}', [ServiceController::class, 'destroy']);
 
-Route::get('employees', [EmployeeController::class, 'index']);
+Route::get('employees/{id}', [EmployeeController::class, 'index']);
 Route::post('/add-employee', [EmployeeController::class, 'store']);
 Route::get('/edit-employee/{id}', [EmployeeController::class, 'edit']);
 Route::put('update-employee/{id}', [EmployeeController::class, 'update']);
 Route::delete('delete-employee/{id}', [EmployeeController::class, 'destroy']);
 
-Route::get('veterinaries', [VeterinaryController::class, 'index']);
+Route::get('veterinaries/{id}', [VeterinaryController::class, 'index']);
 Route::delete('delete-vet/{id}', [VeterinaryController::class, 'destroy']);
 Route::post('/add-vet', [VeterinaryController::class, 'store']);
 Route::get('/edit-vet/{id}', [VeterinaryController::class, 'edit']);

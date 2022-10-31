@@ -14,9 +14,9 @@ class VeterinaryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($clinic_id)
     {
-        $veterinaries = Veterinary::all();
+        $veterinaries = Veterinary::where('clinic_id', $clinic_id)->get();
         return response()->json([
             'status'=> 200,
             'veterinaries'=>$veterinaries,
@@ -42,6 +42,7 @@ class VeterinaryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
+            'clinic_id'=>'required|max:191',
             'vet_name'=>'required|max:191',
             'vet_email'=>'required|max:191',
             'vet_phone_number'=>'required|max:191',
@@ -58,6 +59,7 @@ class VeterinaryController extends Controller
         else
         {
             $vet = new Veterinary;
+            $vet->clinic_id = $request->input('clinic_id');
             $vet->vet_name = $request->input('vet_name');
             $vet->vet_email = $request->input('vet_email');
             $vet->vet_phone_number = $request->input('vet_phone_number');

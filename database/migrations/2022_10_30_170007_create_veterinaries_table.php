@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('veterinaries', function (Blueprint $table) {
             $table->id();
+            $table->string('clinic_id');
             $table->string('vet_name');
             $table->string('vet_email');
             $table->string('vet_phone_number');

@@ -14,9 +14,9 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($clinic_id)
     {
-        $services = Service::all();
+        $services = Service::where('clinic_id', $clinic_id)->get();
         return response()->json([
             'status'=> 200,
             'services'=>$services,
@@ -42,6 +42,7 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
+            'clinic_id'=>'required|max:191',
             'service_name'=>'required|max:191',
             'service_price'=>'required|max:191',
             'service_description'=>'required|max:191',
@@ -57,6 +58,7 @@ class ServiceController extends Controller
         else
         {
             $service = new Service;
+            $service->clinic_id = $request->input('clinic_id');
             $service->service_name = $request->input('service_name');
             $service->service_price = $request->input('service_price');
             $service->service_description = $request->input('service_description');

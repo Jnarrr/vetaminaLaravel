@@ -14,9 +14,9 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($clinic_id)
     {
-        $employees = Employee::all();
+        $employees = Employee::where('clinic_id', $clinic_id)->get();
         return response()->json([
             'status'=> 200,
             'employees'=>$employees,
@@ -42,6 +42,7 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
+            'clinic_id'=>'required|max:191',
             'employee_name'=>'required|max:191',
             'employee_email'=>'required|max:191',
             'employee_phone_number'=>'required|max:191',
@@ -58,6 +59,7 @@ class EmployeeController extends Controller
         else
         {
             $employee = new Employee;
+            $employee->clinic_id = $request->input('clinic_id');
             $employee->employee_name = $request->input('employee_name');
             $employee->employee_email = $request->input('employee_email');
             $employee->employee_phone_number = $request->input('employee_phone_number');
