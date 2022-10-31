@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Veterinary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class VeterinaryController extends Controller
 {
@@ -40,7 +41,34 @@ class VeterinaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'vet_name'=>'required|max:191',
+            'vet_email'=>'required|max:191',
+            'vet_phone_number'=>'required|max:191',
+            'vet_password'=>'required|max:191',
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=> 422,
+                'validate_err'=> $validator->messages(),
+            ]);
+        }
+        else
+        {
+            $vet = new Veterinary;
+            $vet->vet_name = $request->input('vet_name');
+            $vet->vet_email = $request->input('vet_email');
+            $vet->vet_phone_number = $request->input('vet_phone_number');
+            $vet->vet_password = $request->input('vet_password');
+            $vet->save();
+
+            return response()->json([
+                'status'=> 200,
+                'message'=>'Veterinary Added Successfully',
+            ]);
+        }
     }
 
     /**
@@ -60,9 +88,23 @@ class VeterinaryController extends Controller
      * @param  \App\Models\Veterinary  $veterinary
      * @return \Illuminate\Http\Response
      */
-    public function edit(Veterinary $veterinary)
+    public function edit($id)
     {
-        //
+        $vet = Veterinary::find($id);
+        if($vet)
+        {
+            return response()->json([
+                'status'=> 200,
+                'vet' => $vet,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=> 404,
+                'message' => 'No Veterinary ID Found',
+            ]);
+        }
     }
 
     /**
@@ -72,9 +114,46 @@ class VeterinaryController extends Controller
      * @param  \App\Models\Veterinary  $veterinary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Veterinary $veterinary)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'vet_name'=>'required|max:191',
+            'vet_email'=>'required|max:191',
+            'vet_phone_number'=>'required|max:191',
+            'vet_password'=>'required|max:191',
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=> 422,
+                'validationErrors'=> $validator->messages(),
+            ]);
+        }
+        else
+        {
+            $vet = Veterinary::find($id);
+            if($vet)
+            {
+                $vet->vet_name = $request->input('vet_name');
+                $vet->vet_email = $request->input('vet_email');
+                $vet->vet_phone_number = $request->input('vet_phone_number');
+                $vet->vet_password = $request->input('vet_password');
+                $vet->update();
+
+                return response()->json([
+                    'status'=> 200,
+                    'message'=>'Veterinary Updated Successfully',
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=> 404,
+                    'message' => 'No Veterinary ID Found',
+                ]);
+            }
+        }
     }
 
     /**
