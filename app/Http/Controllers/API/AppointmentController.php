@@ -15,7 +15,9 @@ class AppointmentController extends Controller
      */
     public function index()
     {
+        // add $user_id parameter
         $appointment = Appointment::all();
+        //$appointment = Appointment::where('user_id', $user_id)->get();
 
         $data = [
             'status' => true,

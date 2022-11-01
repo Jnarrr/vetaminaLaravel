@@ -32,6 +32,14 @@ class VeterinaryController extends Controller
     {
         //
     }
+    /*
+    public function vetlogin(Request $req){
+        $vetuser = Employee::where('vet_email',$req->vet_email)->first();
+        if(!$vetuser || !Hash::check($req->vet_password,$vetuser->vet_password)){
+            return ["error"=>"Email or Password is not matched"];
+        }
+        return $vetuser;
+    }*/
 
     /**
      * Store a newly created resource in storage.
@@ -63,7 +71,7 @@ class VeterinaryController extends Controller
             $vet->vet_name = $request->input('vet_name');
             $vet->vet_email = $request->input('vet_email');
             $vet->vet_phone_number = $request->input('vet_phone_number');
-            $vet->vet_password = $request->input('vet_password');
+            $vet->vet_password = Hash::make($request->input('vet_password'));
             $vet->save();
 
             return response()->json([
@@ -140,7 +148,7 @@ class VeterinaryController extends Controller
                 $vet->vet_name = $request->input('vet_name');
                 $vet->vet_email = $request->input('vet_email');
                 $vet->vet_phone_number = $request->input('vet_phone_number');
-                $vet->vet_password = $request->input('vet_password');
+                $vet->vet_password = Hash::make($request->input('vet_password'));
                 $vet->update();
 
                 return response()->json([

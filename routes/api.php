@@ -38,12 +38,14 @@ Route::post('/add-employee', [EmployeeController::class, 'store']);
 Route::get('/edit-employee/{id}', [EmployeeController::class, 'edit']);
 Route::put('update-employee/{id}', [EmployeeController::class, 'update']);
 Route::delete('delete-employee/{id}', [EmployeeController::class, 'destroy']);
+Route::post('employeelogin', [EmployeeController::class, 'employeelogin']);
 
 Route::get('veterinaries/{id}', [VeterinaryController::class, 'index']);
 Route::delete('delete-vet/{id}', [VeterinaryController::class, 'destroy']);
 Route::post('/add-vet', [VeterinaryController::class, 'store']);
 Route::get('/edit-vet/{id}', [VeterinaryController::class, 'edit']);
 Route::put('update-vet/{id}', [VeterinaryController::class, 'update']);
+//Route::post('vetlogin', [VeterinaryController::class, 'vetlogin']);
 
 
 Route::post('vetregister', [VetController::class, 'vetregister']);

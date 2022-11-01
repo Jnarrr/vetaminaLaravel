@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -21,6 +22,14 @@ class EmployeeController extends Controller
             'status'=> 200,
             'employees'=>$employees,
         ]);
+    }
+
+    public function employeelogin(Request $req){
+        $employeeuser = Employee::where('employee_email',$req->employee_email)->first();
+        if(!$employeeuser || !Hash::check($req->employee_password,$employeeuser->employee_password)){
+            return ["error"=>"Email or Password is not matched"];
+        }
+        return $employeeuser;
     }
 
     /**
@@ -63,7 +72,7 @@ class EmployeeController extends Controller
             $employee->employee_name = $request->input('employee_name');
             $employee->employee_email = $request->input('employee_email');
             $employee->employee_phone_number = $request->input('employee_phone_number');
-            $employee->employee_password = $request->input('employee_password');
+            $employee->employee_password = Hash::make($request->input('employee_password'));
             $employee->save();
 
             return response()->json([
@@ -140,7 +149,7 @@ class EmployeeController extends Controller
                 $employee->employee_name = $request->input('employee_name');
                 $employee->employee_email = $request->input('employee_email');
                 $employee->employee_phone_number = $request->input('employee_phone_number');
-                $employee->employee_password = $request->input('employee_password');
+                $employee->employee_password = Hash::make($request->input('employee_password'));
                 $employee->update();
 
                 return response()->json([
