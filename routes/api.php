@@ -45,11 +45,10 @@ Route::delete('delete-vet/{id}', [VeterinaryController::class, 'destroy']);
 Route::post('/add-vet', [VeterinaryController::class, 'store']);
 Route::get('/edit-vet/{id}', [VeterinaryController::class, 'edit']);
 Route::put('update-vet/{id}', [VeterinaryController::class, 'update']);
-//Route::post('vetlogin', [VeterinaryController::class, 'vetlogin']);
+Route::post('vetlogin', [VeterinaryController::class, 'vetlogin']);
 
-
-Route::post('vetregister', [VetController::class, 'vetregister']);
-Route::post('vetlogin', [VetController::class, 'vetlogin']);
+/*Route::post('vetregister', [VetController::class, 'vetregister']);
+Route::post('vetlogin', [VetController::class, 'vetlogin']);*/
 
 Route::post('customerregister', [CustomerUserController::class, 'customerregister']);
 Route::post('customerlogin', [CustomerUserController::class, 'customerlogin']);

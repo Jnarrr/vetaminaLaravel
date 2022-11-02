@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Veterinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class VeterinaryController extends Controller
 {
@@ -32,14 +33,14 @@ class VeterinaryController extends Controller
     {
         //
     }
-    /*
+    
     public function vetlogin(Request $req){
-        $vetuser = Employee::where('vet_email',$req->vet_email)->first();
+        $vetuser = Veterinary::where('vet_email',$req->vet_email)->first();
         if(!$vetuser || !Hash::check($req->vet_password,$vetuser->vet_password)){
             return ["error"=>"Email or Password is not matched"];
         }
         return $vetuser;
-    }*/
+    }
 
     /**
      * Store a newly created resource in storage.
