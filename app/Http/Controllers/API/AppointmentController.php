@@ -13,10 +13,10 @@ class AppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user_id)
     {
         // add $user_id parameter
-        $appointment = Appointment::all();
+        /*$appointment = Appointment::all();
         //$appointment = Appointment::where('user_id', $user_id)->get();
 
         $data = [
@@ -24,7 +24,12 @@ class AppointmentController extends Controller
             'appointments' => $appointment
         ];
 
-        return response()->json($data);
+        return response()->json($data);*/
+        $appointment = Appointment::where('user_id', $user_id)->get();
+        return response()->json([
+            'status'=> 200,
+            'appointments'=>$appointment
+        ]);
     }
 
     /**
@@ -48,6 +53,7 @@ class AppointmentController extends Controller
         //
         $appointment = new Appointment;
 
+        $appointment->user_id = $request->user_id;
         $appointment->procedure = $request->procedure;
         $appointment->date = $request->date;
         $appointment->time = $request->time;

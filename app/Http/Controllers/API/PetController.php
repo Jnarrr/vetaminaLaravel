@@ -13,8 +13,9 @@ class PetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user_id)
     {
+        /*
         $pet = Pet::all();
 
         $data = [
@@ -22,7 +23,13 @@ class PetController extends Controller
             'pets' => $pet
         ];
 
-        return response()->json($data);
+        return response()->json($data);*/
+
+        $pet = Pet::where('user_id', $user_id)->get();
+        return response()->json([
+            'status'=> 200,
+            'pets'=>$pet,
+        ]);
     }
 
     /**
@@ -45,6 +52,7 @@ class PetController extends Controller
     {
         $pet = new Pet;
 
+        $pet->user_id = $request->user_id;
         $pet->pet_name = $request->pet_name;
         $pet->pet_type = $request->pet_type;
         $pet->pet_sex = $request->pet_sex;

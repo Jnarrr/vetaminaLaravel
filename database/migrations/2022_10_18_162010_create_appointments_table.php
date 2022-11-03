@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            //$table->string('user_id');
+            $table->string('user_id');
             $table->string('procedure');
             $table->string('date');
             $table->string('time');

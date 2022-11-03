@@ -53,8 +53,8 @@ Route::post('vetlogin', [VetController::class, 'vetlogin']);*/
 Route::post('customerregister', [CustomerUserController::class, 'customerregister']);
 Route::post('customerlogin', [CustomerUserController::class, 'customerlogin']);
 
-Route::get('pets', [PetController::class, 'index']);
-Route::post('pets', [PetController::class, 'store']);
+Route::get('pets/{id}', [PetController::class, 'index']);
+Route::post('add-pets', [PetController::class, 'store']);
 
-Route::get('appointments', [AppointmentController::class, 'index']);
-Route::post('appointments', [AppointmentController::class, 'store']);
+Route::get('appointments/{id}', [AppointmentController::class, 'index']);
+Route::post('add-appointments', [AppointmentController::class, 'store']);
