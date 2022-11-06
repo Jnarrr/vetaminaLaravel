@@ -32,6 +32,25 @@ class AppointmentController extends Controller
         ]);
     }
 
+    public function index2($clinic_id)
+    {
+        // add $user_id parameter
+        /*$appointment = Appointment::all();
+        //$appointment = Appointment::where('user_id', $user_id)->get();
+
+        $data = [
+            'status' => true,
+            'appointments' => $appointment
+        ];
+
+        return response()->json($data);*/
+        $appointment = Appointment::where('clinic_id', $clinic_id)->get();
+        return response()->json([
+            'status'=> 200,
+            'appointments'=>$appointment
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -54,6 +73,7 @@ class AppointmentController extends Controller
         $appointment = new Appointment;
 
         $appointment->user_id = $request->user_id;
+        $appointment->clinic_id = $request->clinic_id;
         $appointment->procedure = $request->procedure;
         $appointment->date = $request->date;
         $appointment->time = $request->time;

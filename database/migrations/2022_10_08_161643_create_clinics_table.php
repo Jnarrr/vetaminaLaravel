@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('clinics', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->string('password');
-            $table->string('registration_number');
-            $table->string('owner_name');
-            $table->string('clinic_name');
-            $table->string('phone_number');
-            $table->string('address');
-            $table->string('email')->unique();
-            $table->string('permit');
-            $table->boolean('verified')->default('0')->change();
+            $table->string('username', 20);
+            $table->string('password', 191);
+            $table->string('registration_number', 50);
+            $table->string('owner_name', 50);
+            $table->string('clinic_name', 50);
+            $table->string('phone_number', 20);
+            $table->string('address', 100);
+            $table->string('email', 100)->unique();
+            $table->string('permit', 191);
+            $table->string('verified')->default('false')->change();
             $table->timestamps();
         });
     }

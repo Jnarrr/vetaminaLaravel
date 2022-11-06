@@ -57,4 +57,5 @@ Route::get('pets/{id}', [PetController::class, 'index']);
 Route::post('add-pets', [PetController::class, 'store']);
 
 Route::get('appointments/{id}', [AppointmentController::class, 'index']);
+Route::get('ClinicAppointments/{id}', [AppointmentController::class, 'index2']);
 Route::post('add-appointments', [AppointmentController::class, 'store']);
