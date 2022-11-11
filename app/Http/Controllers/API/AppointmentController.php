@@ -74,6 +74,8 @@ class AppointmentController extends Controller
 
         $appointment->user_id = $request->user_id;
         $appointment->clinic_id = $request->clinic_id;
+        $appointment->clinic_name = $request->clinic_name;
+        $appointment->clinic_address = $request->clinic_address;
         $appointment->procedure = $request->procedure;
         $appointment->date = $request->date;
         $appointment->time = $request->time;
@@ -129,8 +131,23 @@ class AppointmentController extends Controller
      * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Appointment $appointment)
+    public function destroy($id)
     {
-        //
+        $appointment = Appointment::find($id);
+        if($appointment)
+        {
+            $appointment->delete();
+            return response()->json([
+                'status'=> 200,
+                'message'=>'Appointment Deleted Successfully',
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=> 404,
+                'message' => 'No Appointment ID Found',
+            ]);
+        }
     }
 }

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('user_id', 100);
             $table->string('clinic_id', 100);
+            $table->string('clinic_name', 100);
+            $table->string('clinic_address', 100);
             $table->string('procedure', 100);
             $table->string('date', 50);
             $table->string('time', 20);
