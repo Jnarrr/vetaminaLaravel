@@ -23,6 +23,16 @@ class ProductController extends Controller
         ]);
     }
 
+    public function showAllProducts()
+    {
+        $products = Product::all();
+        return response()->json([
+            'status'=> 200,
+            'products'=>$products,
+        ]);
+
+    }
+
 
     /**
      * Show the form for creating a new resource.

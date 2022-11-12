@@ -21,6 +21,7 @@ Route::delete('delete-clinic/{id}', [ClinicController::class, 'destroy']);
 Route::get('list', [ClinicController::class, 'list']);
 Route::post('cliniclogin', [ClinicController::class, 'cliniclogin']);
 
+Route::get('all-products', [ProductController::class, 'showAllProducts']);
 Route::get('products/{id}', [ProductController::class, 'index']);
 Route::post('/add-product', [ProductController::class, 'store']);
 Route::get('/edit-product/{id}', [ProductController::class, 'edit']);
