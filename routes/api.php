@@ -11,6 +11,7 @@ use App\Http\Controllers\API\ServiceController;
 use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\VeterinaryController;
 use App\Http\Controllers\API\CustomerUserController;
+use App\Http\Controllers\API\MedicalRecordController;
 
 Route::get('clinics', [ClinicController::class, 'index']);
 Route::get('clinics2', [ClinicController::class, 'index2']);
@@ -63,3 +64,5 @@ Route::put('update-appointment/{id}', [AppointmentController::class, 'update']);
 Route::get('ClinicAppointments/{id}', [AppointmentController::class, 'index2']);
 Route::delete('delete-appointment/{id}', [AppointmentController::class, 'destroy']);
 Route::post('add-appointments', [AppointmentController::class, 'store']);
+
+Route::get('medicalrecord/{id}', [MedicalRecordController::class, 'index']);
