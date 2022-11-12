@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('date', 50);
             $table->string('time', 20);
             $table->string('pet', 191);
+            $table->string('status', 50);
             $table->timestamps();
         });
     }

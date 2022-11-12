@@ -58,6 +58,8 @@ Route::get('pets/{id}', [PetController::class, 'index']);
 Route::post('add-pets', [PetController::class, 'store']);
 
 Route::get('appointments/{id}', [AppointmentController::class, 'index']);
+Route::get('/edit-appointment/{id}', [AppointmentController::class, 'edit']);
+Route::put('update-appointment/{id}', [AppointmentController::class, 'update']);
 Route::get('ClinicAppointments/{id}', [AppointmentController::class, 'index2']);
 Route::delete('delete-appointment/{id}', [AppointmentController::class, 'destroy']);
 Route::post('add-appointments', [AppointmentController::class, 'store']);

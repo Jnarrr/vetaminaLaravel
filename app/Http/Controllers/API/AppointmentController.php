@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AppointmentController extends Controller
 {
@@ -80,6 +81,7 @@ class AppointmentController extends Controller
         $appointment->date = $request->date;
         $appointment->time = $request->time;
         $appointment->pet = $request->pet;
+        $appointment->status = $request->status;
 
         $appointment->save();
 
@@ -108,9 +110,23 @@ class AppointmentController extends Controller
      * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Appointment $appointment)
+    public function edit($id)
     {
-        //
+        $appointment = Appointment::find($id);
+        if($appointment)
+        {
+            return response()->json([
+                'status'=> 200,
+                'appointment' => $appointment,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=> 404,
+                'message' => 'No Apppointment ID Found',
+            ]);
+        }
     }
 
     /**
@@ -120,9 +136,40 @@ class AppointmentController extends Controller
      * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Appointment $appointment)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'status'=>'required|max:191',
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=> 422,
+                'validationErrors'=> $validator->messages(),
+            ]);
+        }
+        else
+        {
+            $appointment = Appointment::find($id);
+            if($appointment)
+            {
+                $appointment->status = $request->input('status');
+                $appointment->update();
+
+                return response()->json([
+                    'status'=> 200,
+                    'message'=>'Product Updated Successfully',
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=> 404,
+                    'message' => 'No Product ID Found',
+                ]);
+            }
+        }
     }
 
     /**
