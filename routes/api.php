@@ -66,3 +66,8 @@ Route::delete('delete-appointment/{id}', [AppointmentController::class, 'destroy
 Route::post('add-appointments', [AppointmentController::class, 'store']);
 
 Route::get('medicalrecord/{id}', [MedicalRecordController::class, 'index']);
+Route::get('medicalrecordAll', [MedicalRecordController::class, 'showAll']);
+Route::post('add-medicalrecord/{id}', [MedicalRecordController::class, 'store']);
+Route::get('/edit-medicalrecord/{id}', [MedicalRecordController::class, 'edit']);
+Route::put('update-medicalrecord/{id}', [MedicalRecordController::class, 'update']);
+Route::delete('delete-medicalrecord/{id}', [MedicalRecordController::class, 'destroy']);
