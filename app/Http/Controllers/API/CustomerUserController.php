@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CustomerUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class CustomerUserController extends Controller
 {
@@ -93,9 +94,40 @@ class CustomerUserController extends Controller
      * @param  \App\Models\CustomerUser  $customerUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CustomerUser $customerUser)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'password'=>'required|max:191',
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=> 422,
+                'validationErrors'=> $validator->messages(),
+            ]);
+        }
+        else
+        {
+            $customeruser = CustomerUser::find($id);
+            if($customeruser)
+            {
+                $customeruser->password = Hash::make($request->input('password'));
+                $customeruser->update();
+
+                return response()->json([
+                    'status'=> 200,
+                    'message'=>'Password Updated Successfully',
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=> 404,
+                    'message' => 'No User ID Found',
+                ]);
+            }
+        }
     }
 
     /**

@@ -54,6 +54,7 @@ Route::post('vetlogin', [VetController::class, 'vetlogin']);*/
 
 Route::post('customerregister', [CustomerUserController::class, 'customerregister']);
 Route::post('customerlogin', [CustomerUserController::class, 'customerlogin']);
+Route::put('update-customeruser/{id}', [CustomerUserController::class, 'update']);
 
 Route::get('pets/{id}', [PetController::class, 'index']);
 Route::post('add-pets', [PetController::class, 'store']);
