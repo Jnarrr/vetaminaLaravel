@@ -72,3 +72,4 @@ Route::post('add-medicalrecord/{id}', [MedicalRecordController::class, 'store'])
 Route::get('/edit-medicalrecord/{id}', [MedicalRecordController::class, 'edit']);
 Route::put('update-medicalrecord/{id}', [MedicalRecordController::class, 'update']);
 Route::delete('delete-medicalrecord/{id}', [MedicalRecordController::class, 'destroy']);
+Route::get('search/{id}', [MedicalRecordController::class, 'search']);

@@ -81,6 +81,11 @@ class MedicalRecordController extends Controller
         }
     }
 
+    public function search($key)
+    {
+        return MedicalRecord::where('pet_id', 'Like', "%$key%")->get();
+    }
+
     /**
      * Display the specified resource.
      *
