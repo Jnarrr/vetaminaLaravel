@@ -52,6 +52,24 @@ class AppointmentController extends Controller
         ]);
     }
 
+    public function appointmentCount($clinic_id)
+    {
+        $appointment = Appointment::where('clinic_id', $clinic_id)->where('status', 'Waiting for Approval')->get();
+        return response()->json([
+            'status'=> 200,
+            'appointmentsCount'=> $appointment->count()
+        ]);
+    }
+
+    public function approvedAppointmentCount($clinic_id)
+    {
+        $appointment = Appointment::where('clinic_id', $clinic_id)->where('status', 'Approved')->get();
+        return response()->json([
+            'status'=> 200,
+            'appointmentsCount'=> $appointment->count()
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\MedicalRecord;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MedicalRecordController extends Controller
 {
@@ -135,7 +136,6 @@ class MedicalRecordController extends Controller
             'Date'=>'required|max:100',
             'Weight'=>'required|max:100',
             'Against_Manufacturer_LotNo'=>'required|max:100',
-            'vet_name'=>'required|max:100',
         ]);
 
         if($validator->fails())
@@ -153,7 +153,6 @@ class MedicalRecordController extends Controller
                 $medicalrecord->Date = $request->input('Date');
                 $medicalrecord->Weight = $request->input('Weight');
                 $medicalrecord->Against_Manufacturer_LotNo = $request->input('Against_Manufacturer_LotNo');
-                $medicalrecord->vet_name = $request->input('vet_name');
                 $medicalrecord->update();
 
                 return response()->json([
