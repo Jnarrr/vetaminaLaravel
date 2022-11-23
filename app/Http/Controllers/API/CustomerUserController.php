@@ -44,6 +44,11 @@ class CustomerUserController extends Controller
         return $customeruser;
     }
 
+    public function userSearch($key)
+    {
+        return CustomerUser::where('id', 'Like', "%$key%")->get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

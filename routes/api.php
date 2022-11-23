@@ -55,6 +55,7 @@ Route::post('vetlogin', [VetController::class, 'vetlogin']);*/
 Route::post('customerregister', [CustomerUserController::class, 'customerregister']);
 Route::post('customerlogin', [CustomerUserController::class, 'customerlogin']);
 Route::put('update-customeruser/{id}', [CustomerUserController::class, 'update']);
+Route::get('userSearch/{id}', [CustomerUserController::class, 'userSearch']);
 
 Route::get('pets/{id}', [PetController::class, 'index']);
 Route::post('add-pets', [PetController::class, 'store']);
@@ -75,3 +76,4 @@ Route::get('/edit-medicalrecord/{id}', [MedicalRecordController::class, 'edit'])
 Route::put('update-medicalrecord/{id}', [MedicalRecordController::class, 'update']);
 Route::delete('delete-medicalrecord/{id}', [MedicalRecordController::class, 'destroy']);
 Route::get('search/{id}', [MedicalRecordController::class, 'search']);
+
