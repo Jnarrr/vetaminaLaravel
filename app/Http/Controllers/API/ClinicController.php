@@ -28,6 +28,17 @@ class ClinicController extends Controller
         ]);
     }
 
+    public function showOneClinic($clinic_id)
+    {
+        $oneClinic = Clinic::where('verified', 'true')
+        ->where('id', $clinic_id)
+        ->get();
+        return response()->json([
+            'status'=> 200,
+            'oneClinic'=>$oneClinic,
+        ]);
+    }
+
     public function list()
     {
         return Clinic::all();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Pet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PetController extends Controller
 {
@@ -89,9 +90,23 @@ class PetController extends Controller
      * @param  \App\Models\Pet  $pet
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pet $pet)
+    public function edit($id)
     {
-        //
+        $pet = Pet::find($id);
+        if($pet)
+        {
+            return response()->json([
+                'status'=> 200,
+                'pet' => $pet,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=> 404,
+                'message' => 'No Pet ID Found',
+            ]);
+        }
     }
 
     /**
@@ -101,9 +116,50 @@ class PetController extends Controller
      * @param  \App\Models\Pet  $pet
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pet $pet)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'pet_name'=>'required|max:191',
+            'pet_type'=>'required|max:191',
+            'pet_sex'=>'required|max:191',
+            'pet_breed'=>'required|max:191',
+            'pet_weight'=>'required|max:191',
+            'pet_description'=>'required|max:191',
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=> 422,
+                'validationErrors'=> $validator->messages(),
+            ]);
+        }
+        else
+        {
+            $pet = Pet::find($id);
+            if($pet)
+            {
+                $pet->pet_name = $request->pet_name;
+                $pet->pet_type = $request->pet_type;
+                $pet->pet_sex = $request->pet_sex;
+                $pet->pet_breed = $request->pet_breed;
+                $pet->pet_weight = $request->pet_weight;
+                $pet->pet_description = $request->pet_description;
+                $pet->update();
+
+                return response()->json([
+                    'status'=> 200,
+                    'message'=>'Pet Information Updated Successfully',
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=> 404,
+                    'message' => 'No Pet ID Found',
+                ]);
+            }
+        }
     }
 
     /**

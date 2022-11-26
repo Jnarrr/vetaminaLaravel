@@ -15,6 +15,7 @@ use App\Http\Controllers\API\MedicalRecordController;
 
 Route::get('clinics', [ClinicController::class, 'index']);
 Route::get('clinics2', [ClinicController::class, 'index2']);
+Route::get('oneClinic/{id}', [ClinicController::class, 'showOneClinic']);
 Route::post('/add-clinic', [ClinicController::class, 'store']);
 Route::get('/edit-clinic/{id}', [ClinicController::class, 'edit']);
 Route::put('update-clinic/{id}', [ClinicController::class, 'update']);
@@ -59,6 +60,8 @@ Route::get('userSearch/{id}', [CustomerUserController::class, 'userSearch']);
 
 Route::get('pets/{id}', [PetController::class, 'index']);
 Route::post('add-pets', [PetController::class, 'store']);
+Route::get('/edit-pets/{id}', [PetController::class, 'edit']);
+Route::put('update-pets/{id}', [PetController::class, 'update']);
 
 Route::get('appointments/{id}', [AppointmentController::class, 'index']);
 Route::get('/edit-appointment/{id}', [AppointmentController::class, 'edit']);
