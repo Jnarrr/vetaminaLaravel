@@ -60,11 +60,13 @@ Route::get('userSearch/{id}', [CustomerUserController::class, 'userSearch']);
 
 Route::get('pets/{id}', [PetController::class, 'index']);
 Route::get('onePet/{id}', [PetController::class, 'onePet']);
+Route::get('recentPet/{id}', [PetController::class, 'recentPet']);
 Route::post('add-pets', [PetController::class, 'store']);
 Route::get('/edit-pets/{id}', [PetController::class, 'edit']);
 Route::put('update-pets/{id}', [PetController::class, 'update']);
 
 Route::get('appointments/{id}', [AppointmentController::class, 'index']);
+Route::get('recentAppointment/{id}', [AppointmentController::class, 'recentAppointment']);
 Route::get('/edit-appointment/{id}', [AppointmentController::class, 'edit']);
 Route::put('update-appointment/{id}', [AppointmentController::class, 'update']);
 Route::get('ClinicAppointments/{id}', [AppointmentController::class, 'index2']);

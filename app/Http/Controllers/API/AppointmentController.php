@@ -52,6 +52,18 @@ class AppointmentController extends Controller
         ]);
     }
 
+    public function recentAppointment($user_id)
+    {
+        $appointment = Appointment::where('user_id', $user_id)
+        ->orderBy('created_at', 'desc')
+        ->limit(1)
+        ->get();
+        return response()->json([
+            'status'=> 200,
+            'appointments'=>$appointment
+        ]);
+    }
+
     public function appointmentCount($clinic_id)
     {
         $appointment = Appointment::where('clinic_id', $clinic_id)->where('status', 'Waiting for Approval')->get();

@@ -42,6 +42,18 @@ class PetController extends Controller
         ]);
     }
 
+    public function recentPet($user_id)
+    {
+        $pet = Pet::where('user_id', $user_id)
+        ->orderBy('created_at', 'desc')
+        ->limit(1)
+        ->get();
+        return response()->json([
+            'status'=> 200,
+            'pets'=>$pet,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
