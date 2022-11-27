@@ -59,6 +59,7 @@ Route::put('update-customeruser/{id}', [CustomerUserController::class, 'update']
 Route::get('userSearch/{id}', [CustomerUserController::class, 'userSearch']);
 
 Route::get('pets/{id}', [PetController::class, 'index']);
+Route::get('onePet/{id}', [PetController::class, 'onePet']);
 Route::post('add-pets', [PetController::class, 'store']);
 Route::get('/edit-pets/{id}', [PetController::class, 'edit']);
 Route::put('update-pets/{id}', [PetController::class, 'update']);
