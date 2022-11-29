@@ -115,12 +115,10 @@ class AppointmentController extends Controller
 
         $appointment->save();
 
-        $data = [
-            'status' => true,
-            'appointment' => $appointment
-        ];
-
-        return response()->json($data, 201);
+        return response()->json([
+            'status'=> 200,
+            'appointment'=>$appointment,
+        ]);
     }
 
     /**
