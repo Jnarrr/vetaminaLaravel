@@ -135,6 +135,46 @@ class CustomerUserController extends Controller
         }
     }
 
+    public function updateProfile(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(),[
+            'username'=>'required|max:191',
+            'email'=>'required|max:191',
+            'phone_number'=>'required|max:191',
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=> 422,
+                'validationErrors'=> $validator->messages(),
+            ]);
+        }
+        else
+        {
+            $pet = CustomerUser::find($id);
+            if($pet)
+            {
+                $pet->username = $request->username;
+                $pet->email = $request->email;
+                $pet->phone_number = $request->phone_number;
+                $pet->update();
+
+                return response()->json([
+                    'status'=> 200,
+                    'message'=>'Profile Information Updated Successfully',
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=> 404,
+                    'message' => 'No Customer User ID Found',
+                ]);
+            }
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *

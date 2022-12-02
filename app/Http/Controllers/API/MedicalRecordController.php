@@ -52,6 +52,7 @@ class MedicalRecordController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'pet_id'=>'required|max:100',
+            'clinic_id'=>'required|max:100',
             'Date'=>'required|max:100',
             'Weight'=>'required|max:100',
             'Against_Manufacturer_LotNo'=>'required|max:100',
@@ -69,6 +70,7 @@ class MedicalRecordController extends Controller
         {
             $medicalrecord = new MedicalRecord;
             $medicalrecord->pet_id = $request->input('pet_id');
+            $medicalrecord->clinic_id = $request->input('clinic_id');
             $medicalrecord->Date = $request->input('Date');
             $medicalrecord->Weight = $request->input('Weight');
             $medicalrecord->Against_Manufacturer_LotNo = $request->input('Against_Manufacturer_LotNo');
@@ -82,9 +84,11 @@ class MedicalRecordController extends Controller
         }
     }
 
-    public function search($key)
+    public function search($key, $id)
     {
-        return MedicalRecord::where('pet_id', 'Like', "%$key%")->get();
+        return MedicalRecord::where('clinic_id', 'Like', "$id%")
+        ->where('pet_id', 'Like', "%$key%")
+        ->get();
     }
 
     /**

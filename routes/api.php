@@ -57,6 +57,7 @@ Route::post('customerregister', [CustomerUserController::class, 'customerregiste
 Route::post('customerlogin', [CustomerUserController::class, 'customerlogin']);
 Route::put('update-customeruser/{id}', [CustomerUserController::class, 'update']);
 Route::get('userSearch/{id}', [CustomerUserController::class, 'userSearch']);
+Route::put('update-profile/{id}', [CustomerUserController::class, 'updateProfile']);
 
 Route::get('pets/{id}', [PetController::class, 'index']);
 Route::get('onePet/{id}', [PetController::class, 'onePet']);
@@ -81,5 +82,6 @@ Route::post('add-medicalrecord', [MedicalRecordController::class, 'store']);
 Route::get('/edit-medicalrecord/{id}', [MedicalRecordController::class, 'edit']);
 Route::put('update-medicalrecord/{id}', [MedicalRecordController::class, 'update']);
 Route::delete('delete-medicalrecord/{id}', [MedicalRecordController::class, 'destroy']);
-Route::get('search/{id}', [MedicalRecordController::class, 'search']);
+Route::get('search/{id}/{key}', [MedicalRecordController::class, 'search']);
+
 

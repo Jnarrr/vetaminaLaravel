@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('medical_records', function (Blueprint $table) {
             $table->id();
             $table->string('pet_id', 50);
+            $table->string('clinic_id', 50);
             $table->string('Date', 50);
             $table->string('Weight', 50);
             $table->string('Against_Manufacturer_LotNo', 150);
