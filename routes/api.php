@@ -55,6 +55,7 @@ Route::post('vetlogin', [VetController::class, 'vetlogin']);*/
 
 Route::post('customerregister', [CustomerUserController::class, 'customerregister']);
 Route::post('customerlogin', [CustomerUserController::class, 'customerlogin']);
+Route::get('getUser/{id}', [CustomerUserController::class, 'edit']);
 Route::put('update-customeruser/{id}', [CustomerUserController::class, 'update']);
 Route::get('userSearch/{id}', [CustomerUserController::class, 'userSearch']);
 Route::put('update-profile/{id}', [CustomerUserController::class, 'updateProfile']);
@@ -75,6 +76,8 @@ Route::delete('delete-appointment/{id}', [AppointmentController::class, 'destroy
 Route::post('add-appointments', [AppointmentController::class, 'store']);
 Route::get('appointmentsCount/{id}', [AppointmentController::class, 'appointmentCount']);
 Route::get('approvedAppointmentCount/{id}', [AppointmentController::class, 'approvedAppointmentCount']);
+Route::get('appointmentCurrentMonthCount/{id}', [AppointmentController::class, 'appointmentCurrentMonthCount']);
+Route::get('appointmentServiceCount/{id}', [AppointmentController::class, 'appointmentServiceCount']);
 
 Route::get('medicalrecord/{id}', [MedicalRecordController::class, 'index']);
 Route::get('medicalrecordAll', [MedicalRecordController::class, 'showAll']);
@@ -83,5 +86,8 @@ Route::get('/edit-medicalrecord/{id}', [MedicalRecordController::class, 'edit'])
 Route::put('update-medicalrecord/{id}', [MedicalRecordController::class, 'update']);
 Route::delete('delete-medicalrecord/{id}', [MedicalRecordController::class, 'destroy']);
 Route::get('search/{id}/{key}', [MedicalRecordController::class, 'search']);
+Route::get('medicalReport/{id}', [MedicalRecordController::class, 'medicalReport']);
+Route::get('medicalrecordCurrentMonthCount/{id}', [MedicalRecordController::class, 'medicalrecordCurrentMonthCount']);
+
 
 

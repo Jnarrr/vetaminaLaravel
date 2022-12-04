@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MedicalRecord;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class MedicalRecordController extends Controller
 {
@@ -29,6 +30,52 @@ class MedicalRecordController extends Controller
         return response()->json([
             'status'=> 200,
             'medical_records'=>$medicalrecords,
+        ]);
+    }
+
+    public function medicalrecordCurrentMonthCount($clinic_id)
+    {
+        $medicalrecord = MedicalRecord::whereMonth('created_at', Carbon::now()->month)
+        ->where('clinic_id', $clinic_id)
+        ->get();
+        
+        return response()->json([
+            'status'=> 200,
+            'medicalrecordCurrentMonthCount'=> $medicalrecord->count()
+        ]);
+    }
+
+    public function medicalReport($clinic_id)
+    {
+        $parvo = MedicalRecord::whereMonth('created_at', Carbon::now()->month)
+        ->where('clinic_id', $clinic_id)
+        ->where('Against_Manufacturer_LotNo', 'Like', '%Parvo%')
+        ->get();
+        $parasite = MedicalRecord::whereMonth('created_at', Carbon::now()->month)
+        ->where('clinic_id', $clinic_id)
+        ->where('Against_Manufacturer_LotNo', 'Like', "%Parasite%")
+        ->get();
+        $rabies = MedicalRecord::whereMonth('created_at', Carbon::now()->month)
+        ->where('clinic_id', $clinic_id)
+        ->where('Against_Manufacturer_LotNo', 'Like', "%Rabies%")
+        ->get();
+        
+
+        $parvoCount = $parvo->count();
+        $parasiteCount = $parasite->count();
+        $rabiesCount = $rabies->count();
+        //$monthNow = Carbon::now()->month; for testing
+
+        $data = [
+            $parvoCount,
+            $parasiteCount,
+            $rabiesCount,
+            //$monthNow,
+        ];
+
+        return response()->json([
+            'status'=> 200,
+            'allMedicalRecordsCount'=> $data
         ]);
     }
 
@@ -86,8 +133,8 @@ class MedicalRecordController extends Controller
 
     public function search($key, $id)
     {
-        return MedicalRecord::where('clinic_id', 'Like', "$id%")
-        ->where('pet_id', 'Like', "%$key%")
+        return MedicalRecord::where('clinic_id', "$id")
+        ->where('pet_id', 'Like', "$key")
         ->get();
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class AppointmentController extends Controller
 {
@@ -45,7 +46,10 @@ class AppointmentController extends Controller
         ];
 
         return response()->json($data);*/
-        $appointment = Appointment::where('clinic_id', $clinic_id)->get();
+        $appointment = Appointment::where('clinic_id', $clinic_id)
+        ->orderBy('time', 'asc')
+        ->orderBy('date', 'asc')
+        ->get();
         return response()->json([
             'status'=> 200,
             'appointments'=>$appointment
@@ -81,6 +85,57 @@ class AppointmentController extends Controller
             'appointmentsCount'=> $appointment->count()
         ]);
     }
+
+    public function appointmentCurrentMonthCount($clinic_id)
+    {
+        $appointment = Appointment::whereMonth('created_at', Carbon::now()->month)
+        ->where('clinic_id', $clinic_id)
+        ->get();
+        
+        return response()->json([
+            'status'=> 200,
+            'appointmentCurrentMonthCount'=> $appointment->count()
+        ]);
+    }
+
+    public function appointmentServiceCount($clinic_id)
+    {
+        $vaccine = Appointment::whereMonth('created_at', Carbon::now()->month)
+        ->where('clinic_id', "$clinic_id")
+        ->where('procedure', 'Like', "%Vaccine%")
+        ->get();
+        $grooming = Appointment::whereMonth('created_at', Carbon::now()->month)
+        ->where('clinic_id', "$clinic_id")
+        ->where('procedure', 'Like', "%Grooming%")
+        ->get();
+        $surgery = Appointment::whereMonth('created_at', Carbon::now()->month)
+        ->where('clinic_id', "$clinic_id")
+        ->where('procedure', 'Like', "%Surgery%")
+        ->get();
+        $checkup = Appointment::whereMonth('created_at', Carbon::now()->month)
+        ->where('clinic_id', "$clinic_id")
+        ->where('procedure', 'Like', "%Checkup%")
+        ->get();
+
+        $vaccineCount = $vaccine->count();
+        $groomingCount = $grooming->count();
+        $surgeryCount = $surgery->count();
+        $checkupCount = $checkup->count();
+
+        $data = [
+            $vaccineCount,
+            $groomingCount,
+            $surgeryCount,
+            $checkupCount,
+        ];
+
+        return response()->json([
+            'status'=> 200,
+            'allproceduresCount'=> $data
+        ]);
+    }
+
+    
 
     /**
      * Show the form for creating a new resource.

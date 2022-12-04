@@ -87,9 +87,25 @@ class CustomerUserController extends Controller
      * @param  \App\Models\CustomerUser  $customerUser
      * @return \Illuminate\Http\Response
      */
-    public function edit(CustomerUser $customerUser)
+
+    public function edit($id)
     {
-        //
+        $customeruser = CustomerUser::find($id);
+        if($customeruser)
+        {
+            return response()->json([
+                'status'=> 200,
+                'customeruser' => $customeruser,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=> 404,
+                'message' => 'No User ID Found',
+            ]);
+        }
+
     }
 
     /**
@@ -140,7 +156,7 @@ class CustomerUserController extends Controller
         $validator = Validator::make($request->all(),[
             'username'=>'required|max:191',
             'email'=>'required|max:191',
-            'phone_number'=>'required|max:191',
+            'mobile_number'=>'required|max:191',
         ]);
 
         if($validator->fails())
@@ -152,13 +168,13 @@ class CustomerUserController extends Controller
         }
         else
         {
-            $pet = CustomerUser::find($id);
-            if($pet)
+            $customeruser = CustomerUser::find($id);
+            if($customeruser)
             {
-                $pet->username = $request->username;
-                $pet->email = $request->email;
-                $pet->phone_number = $request->phone_number;
-                $pet->update();
+                $customeruser->username = $request->input('username');
+                $customeruser->email = $request->input('email');
+                $customeruser->mobile_number = $request->input('mobile_number');
+                $customeruser->update();
 
                 return response()->json([
                     'status'=> 200,
