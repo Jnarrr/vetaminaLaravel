@@ -12,6 +12,7 @@ use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\VeterinaryController;
 use App\Http\Controllers\API\CustomerUserController;
 use App\Http\Controllers\API\MedicalRecordController;
+use App\Http\Controllers\API\ReportController;
 
 Route::get('clinics', [ClinicController::class, 'index']);
 Route::get('clinics2', [ClinicController::class, 'index2']);
@@ -78,6 +79,7 @@ Route::get('appointmentsCount/{id}', [AppointmentController::class, 'appointment
 Route::get('approvedAppointmentCount/{id}', [AppointmentController::class, 'approvedAppointmentCount']);
 Route::get('appointmentCurrentMonthCount/{id}', [AppointmentController::class, 'appointmentCurrentMonthCount']);
 Route::get('appointmentServiceCount/{id}', [AppointmentController::class, 'appointmentServiceCount']);
+Route::get('appointmentSearch/{id}/{key}', [MedicalRecordController::class, 'search']);
 
 Route::get('medicalrecord/{id}', [MedicalRecordController::class, 'index']);
 Route::get('medicalrecordAll', [MedicalRecordController::class, 'showAll']);
@@ -88,6 +90,10 @@ Route::delete('delete-medicalrecord/{id}', [MedicalRecordController::class, 'des
 Route::get('search/{id}/{key}', [MedicalRecordController::class, 'search']);
 Route::get('medicalReport/{id}', [MedicalRecordController::class, 'medicalReport']);
 Route::get('medicalrecordCurrentMonthCount/{id}', [MedicalRecordController::class, 'medicalrecordCurrentMonthCount']);
+
+Route::post('add-report', [ReportController::class, 'addReport']);
+Route::get('get-report/{id}', [ReportController::class, 'getReport']);
+
 
 
 

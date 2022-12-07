@@ -129,10 +129,18 @@ class AppointmentController extends Controller
             $checkupCount,
         ];
 
+
         return response()->json([
             'status'=> 200,
-            'allproceduresCount'=> $data
+            'typesOfAppointment'=> $data,
         ]);
+    }
+
+    public function search($key, $id)
+    {
+        return Appointment::where('clinic_id', "$id")
+        ->where('date', 'Like', "%$key%")
+        ->get();
     }
 
     

@@ -75,7 +75,7 @@ class MedicalRecordController extends Controller
 
         return response()->json([
             'status'=> 200,
-            'allMedicalRecordsCount'=> $data
+            'allMedicalRecordsCount' => $data,
         ]);
     }
 
