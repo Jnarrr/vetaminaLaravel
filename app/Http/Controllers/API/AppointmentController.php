@@ -86,6 +86,16 @@ class AppointmentController extends Controller
         ]);
     }
 
+    public function ApprovedAppointments($clinic_id)
+    {
+        $appointment = Appointment::where('clinic_id', $clinic_id)->where('status', 'Approved')->get();
+        return response()->json([
+            'status'=> 200,
+            'appointments'=> $appointment
+        ]);
+    }
+
+
     public function appointmentCurrentMonthCount($clinic_id)
     {
         $appointment = Appointment::whereMonth('created_at', Carbon::now()->month)

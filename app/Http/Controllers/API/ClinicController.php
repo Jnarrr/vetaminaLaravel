@@ -58,7 +58,7 @@ class ClinicController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'username'=>'required|max:191',
+            'username'=>'required|unique:clinics,username|max:191',
             'password'=>'required|max:191',
             'registration_number'=>'required|max:191',
             'owner_name'=>'required|max:191',

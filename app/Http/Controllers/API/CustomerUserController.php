@@ -28,12 +28,13 @@ class CustomerUserController extends Controller
         $customeruser -> email = $req -> input('email');
         $customeruser -> mobile_number = $req -> input('mobile_number');
         $customeruser -> save();
+
         $data = [
-            'status' => 201,
+            'status' => true,
             'customeruser' => $customeruser
         ];
 
-        return $customeruser->toJson();
+        return response()->json($data, 201);
     }
 
     function customerlogin(Request $req){

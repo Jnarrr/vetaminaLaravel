@@ -77,6 +77,7 @@ Route::delete('delete-appointment/{id}', [AppointmentController::class, 'destroy
 Route::post('add-appointments', [AppointmentController::class, 'store']);
 Route::get('appointmentsCount/{id}', [AppointmentController::class, 'appointmentCount']);
 Route::get('approvedAppointmentCount/{id}', [AppointmentController::class, 'approvedAppointmentCount']);
+Route::get('ApprovedAppointments/{id}', [AppointmentController::class, 'ApprovedAppointments']);
 Route::get('appointmentCurrentMonthCount/{id}', [AppointmentController::class, 'appointmentCurrentMonthCount']);
 Route::get('appointmentServiceCount/{id}', [AppointmentController::class, 'appointmentServiceCount']);
 Route::get('appointmentSearch/{id}/{key}', [MedicalRecordController::class, 'search']);
