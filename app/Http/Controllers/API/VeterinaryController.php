@@ -53,7 +53,7 @@ class VeterinaryController extends Controller
         $validator = Validator::make($request->all(),[
             'clinic_id'=>'required|max:191',
             'vet_name'=>'required|max:191',
-            'vet_email'=>'required|max:191',
+            'vet_email'=>'required|email|max:191',
             'vet_phone_number'=>'required|max:191',
             'vet_password'=>'required|max:191',
         ]);

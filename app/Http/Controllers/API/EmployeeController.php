@@ -53,7 +53,7 @@ class EmployeeController extends Controller
         $validator = Validator::make($request->all(),[
             'clinic_id'=>'required|max:191',
             'employee_name'=>'required|max:191',
-            'employee_email'=>'required|max:191',
+            'employee_email'=>'required|email|max:191',
             'employee_phone_number'=>'required|max:191',
             'employee_password'=>'required|max:191',
         ]);

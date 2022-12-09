@@ -66,7 +66,7 @@ class ClinicController extends Controller
             'phone_number'=>'required|max:191',
             'address'=>'required|max:191',
             'email'=>'required|email|max:191',
-            'permit'=>'required|max:8000',
+            'permit'=>'required|image|mimes:jpeg,png,jpg|max:8000',
             'verified'=>'required|max:191',
         ]);
 
