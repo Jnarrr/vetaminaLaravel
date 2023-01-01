@@ -55,8 +55,9 @@ class VeterinaryController extends Controller
             'vet_name'=>'required|max:191',
             'vet_email'=>'required|email|max:191',
             'vet_phone_number'=>'required|max:191',
-            'vet_password'=>'required|max:191',
-        ]);
+            'vet_password'=>'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/|max:191',
+        ], ['vet_password.regex' => 'The password should contain atleast 1 digit, special, and Uppercase Character']
+        );
 
         if($validator->fails())
         {

@@ -59,16 +59,17 @@ class ClinicController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'username'=>'required|unique:clinics,username|max:191',
-            'password'=>'required|max:191',
+            'password'=>'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/|max:191',
             'registration_number'=>'required|max:191',
             'owner_name'=>'required|max:191',
             'clinic_name'=>'required|max:191',
             'phone_number'=>'required|max:191',
             'address'=>'required|max:191',
             'email'=>'required|email|max:191',
-            'permit'=>'required|image|mimes:jpeg,png,jpg|max:8000',
+            'permit'=>'required|image|mimes:jpeg,png,jpg|max:8192',
             'verified'=>'required|max:191',
-        ]);
+        ], ['password.regex' => 'The password should contain atleast 1 digit, special, and Uppercase Character']
+        );
 
         if($validator->fails())
         {
