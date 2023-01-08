@@ -11,11 +11,11 @@
 
 > NOTICE!
 
-> This should be running in order for the react-native application and reactjs to work since this whole system uses Rest API
+> This Back-end should be running in order for the react-native application and reactjs website to work since this whole system uses Rest API
 
-> For the Vetamina React-Native Application go here -> https://github.com/Jnarrr/vetaminaReactNative.git
+> Download the Vetamina React-Native Application -> https://github.com/Jnarrr/vetaminaReactNative.git
 
-> For the Vetamina ReactJS Website go here -> https://github.com/Jnarrr/vetaminaReactJs.git
+> Download the Vetamina ReactJS Website -> https://github.com/Jnarrr/vetaminaReactJs.git
 
 ## About Vetamina
 Vetamina comes from the word Veterinarian and Bitamina a filipino language for Vitamin as it aids the problems present in a traditional practice and processes
