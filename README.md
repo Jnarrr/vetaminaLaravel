@@ -1,11 +1,58 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+
+<p align="center"><img src="https://user-images.githubusercontent.com/101307843/211162325-8c53770e-f679-447a-aefd-6cf8000c8d65.png" width="300"/></p>
+<p align="center">Supervise, Explore and Advertise your Veterinary Clinic</p>
+
+> NOTICE!
+
+> This Back-end should be running in order for the react-native application and reactjs website to work since this whole system uses Rest API
+
+> Download the Vetamina React-Native Application -> https://github.com/Jnarrr/vetaminaReactNative.git
+
+> Download the Vetamina ReactJS Website -> https://github.com/Jnarrr/vetaminaReactJs.git
+
+## About Vetamina
+Vetamina comes from the word Veterinarian and Bitamina a filipino language for Vitamin as it aids the problems present in a traditional practice and processes
+in a veterinary clinic by using the features of the system.
+
+## Features
+- Clinic Verification
+- Appointment Management
+- Pet, Employee and Veterinarian Information Management
+- Pet and Clinic owner Login/Register
+- Browse Clinics and Products
+- Create an Appointment with a specific pet, time, and date
+
+## Download Manually
+<p>create a folder</p>
+<p>open cmd in the folder then type</p>
+
+```sh
+git clone https://github.com/Jnarrr/vetaminaLaravel.git
+```
+
+## Setup
+<p>open cmd or use the terminal of Visual Studio Code</p>
+<p>go to the directory of the file you created then type </p>
+
+```sh
+composer install
+```
+
+
+## Run 
+open cmd go to the file directory then type the command 
+
+```sh
+php artisan serve
+```
+
 
 ## About Laravel
 
