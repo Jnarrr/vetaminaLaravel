@@ -68,7 +68,7 @@ class ClinicController extends Controller
             'email'=>'required|email|max:191',
             'permit'=>'required|image|mimes:jpeg,png,jpg|max:8192',
             'verified'=>'required|max:191',
-        ], ['password.regex' => 'The password should contain atleast 1 digit, special, and Uppercase Character']
+        ], ['password.regex' => 'The password should contain atleast one Digit, one Special, and one Uppercase Character']
         );
 
         if($validator->fails())
