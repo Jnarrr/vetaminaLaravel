@@ -60,6 +60,7 @@ Route::get('getUser/{id}', [CustomerUserController::class, 'edit']);
 Route::put('update-customeruser/{id}', [CustomerUserController::class, 'update']);
 Route::get('userSearch/{id}', [CustomerUserController::class, 'userSearch']);
 Route::put('update-profile/{id}', [CustomerUserController::class, 'updateProfile']);
+Route::post('verifyEmail', [CustomerUserController::class, 'verifyEmail']);
 
 Route::get('pets/{id}', [PetController::class, 'index']);
 Route::get('onePet/{id}', [PetController::class, 'onePet']);

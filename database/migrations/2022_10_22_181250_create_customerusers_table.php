@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('customerusers', function (Blueprint $table) {
             $table->id();
             $table->string('username', 100)->unique();
-            $table->string('birthdate', 100);
             $table->string('password', 100);
             $table->string('email', 100);
             $table->string('mobile_number', 100);
+            $table->string("otp", 6);
+            $table->string("is_verified", 5)->default("false");
             $table->timestamps();
         });
     }

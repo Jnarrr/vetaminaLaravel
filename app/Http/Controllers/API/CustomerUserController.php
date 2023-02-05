@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Mail\MailMessage;
 use App\Models\CustomerUser;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class CustomerUserController extends Controller
@@ -21,26 +24,97 @@ class CustomerUserController extends Controller
     }
 
     function customerregister(Request $req){
+        $otp = rand(100000,999999); //add
+
         $customeruser = new CustomerUser;
         $customeruser -> username = $req -> input('username');
-        $customeruser -> birthdate = $req -> input('birthdate');
         $customeruser -> password = Hash::make($req -> input('password'));
         $customeruser -> email = $req -> input('email');
         $customeruser -> mobile_number = $req -> input('mobile_number');
+        $customeruser -> otp = $otp; //add
         $customeruser -> save();
 
-        $data = [
+        /*$data = [
             'status' => true,
             'customeruser' => $customeruser
-        ];
+        ];*/
 
-        return response()->json($data, 201);
+        $email = $req->input('email');
+
+        if($customeruser){
+            Mail::to($email)->send(new MailMessage($email, $otp)); // add $otp
+            return new JsonResponse(
+                [
+                    'status' => true,
+                    'customeruser' => $customeruser,
+                    'message' => 'Thank you for registering your account, Please check your inbox'
+                ], 201
+            );
+        }
+
+        //return response()->json($data, 201);
+    }
+
+    public function resendOTP(Request $request){
+        $validator = Validator::make($request->all(),[
+            'email' => 'required|email|max:191',
+            'otp' => 'required|max:191'
+        ]);
+
+        if ($validator->fails()){
+            return new JsonResponse(
+                [
+                    'success' => false, 
+                    'message' => $validator->errors() 
+                ], 422);
+        }
+
+        $otp = rand(100000,999999); //add
+        $email = $req->input('email');
+
+        $user = CustomerUser::where([['email','=',$request->email],['otp','=',$request->otp]])->first();
+        if($user){
+            Mail::to($email)->send(new MailMessage($email, $otp)); // add $otp
+            CustomerUser::where('email','=',$request->email)->update(['otp' => $otp]);
+        }
+    }
+
+    public function verifyEmail(Request $request){
+        $validator = Validator::make($request->all(),[
+            'email' => 'required|email|max:191',
+            'otp' => 'required|max:191'
+        ]);
+
+        if ($validator->fails()){
+            return new JsonResponse(
+                [
+                    'success' => false, 
+                    'message' => $validator->errors() 
+                ], 422);
+        }
+
+        $user = CustomerUser::where([['email','=',$request->email],['otp','=',$request->otp]])->first();
+        if($user){
+            CustomerUser::where('email','=',$request->email)->update(['otp' => '000000', 'is_verified' => 'true']);
+
+            return response(["status" => 200, "message" => "Success"]);
+        }
+        else{
+            return response(["status" => 401, 'message' => 'Invalid']);
+        }
     }
 
     function customerlogin(Request $req){
-        $customeruser = CustomerUser::where('username',$req->username)->first();
+        $customeruser = CustomerUser::where('email',$req->email)->first();
         if(!$customeruser || !Hash::check($req->password,$customeruser->password)){
-            return ["error"=>"Username or Password is not matched"];
+            return ["error"=>"Email address or Password is not matched"];
+        }
+        if($customeruser && Hash::check($req->password,$customeruser->password) && !($customeruser->is_verified == "true")){
+            $otp = rand(100000,999999); //add
+            $email = $req->email;
+            Mail::to($email)->send(new MailMessage($email, $otp)); // add $otp
+            CustomerUser::where('email','=',$req->email)->update(['otp' => $otp]);
+            return ["notVerified"=>"User is not yet verified"];
         }
         return $customeruser;
     }

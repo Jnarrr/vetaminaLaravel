@@ -12,11 +12,14 @@ class CustomerUser extends Model
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = "customerusers";
+    protected $guarded = [];
     protected $fillable = [
         'username',
         'birthdate',
         'password',
         'email',
         'mobile_number',
+        'otp',
+        'is_verified'
     ];
 }
